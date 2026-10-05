@@ -1,0 +1,13 @@
+.git
+.gitignore
+.vscode/
+.idea/
+data/
+k8s/
+README.md
+compose.yaml
+*_test.go
+*.test
+*.out
+*.exe
+directbin

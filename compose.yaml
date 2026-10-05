@@ -1,0 +1,11 @@
+services:
+  directbin:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - directbin-data:/data
+    stop_grace_period: 15s
+
+volumes:
+  directbin-data:
