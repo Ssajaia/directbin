@@ -36,16 +36,9 @@ For source execution, `data/` is relative to the process working directory. The 
 ## Deployment
 
 ```text
-Client
-  |
-  v
-HTTP API
-  |
-  v
-DirectBin process
-  |
-  v
-Local data/<id> files
+flowchart LR
+    Client --> HTTP["DirectBin HTTP server / process"]
+    HTTP --> Files["Local filesystem<br/>data/&lt;id&gt;"]
 ```
 
 The Dockerfile builds a Go binary in a separate stage and runs it as the non-root `directbin` user in an Alpine runtime image. It declares `/data` as a volume and checks `/health`. `compose.yaml` publishes port 8080 and mounts a named volume at `/data`. This preserves files for a single Compose deployment across container recreation.
