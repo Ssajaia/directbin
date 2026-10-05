@@ -1,0 +1,10 @@
+/data/
+/directbin
+/directbin.exe
+*.test
+*.out
+coverage.*
+.idea/
+.vscode/
+.env/
+
