@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Format
+        run: |
+          files=$(find . -type f -name '*.go' -not -path './vendor/*' -exec gofmt -l {} +)
+          if [ -n "$files" ]; then
+            printf '%s\n' "$files"
+            exit 1
+          fi
+      - name: Test
+        run: go test ./...
+      - name: Build
+        run: go build -o /tmp/directbin .
+      - name: Docker build
+        run: docker build -t directbin:ci .
